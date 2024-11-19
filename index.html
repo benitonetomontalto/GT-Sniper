@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GT Sniper</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="img/gtsniper.jpeg" alt="Logotipo do GT Sniper" class="logo-img">
+        </div>
+
+        <!-- Painel de Sinais Manuais -->
+        <div class="section">
+            <h3 class="section-title">Sinais Manuais</h3>
+            <div class="selection-panel">
+                <label for="pair-select">Escolha o Ativo:</label>
+                <select id="pair-select" class="dropdown">
+                    <option value="EUR/USD">EUR/USD</option>
+                    <option value="GBP/USD">GBP/USD</option>
+                    <option value="USD/JPY">USD/JPY</option>
+                    <option value="AUD/USD">AUD/USD</option>
+                    <option value="EUR/JPY">EUR/JPY</option>
+                    <option value="CAD/JPY">CAD/JPY</option>
+                    <option value="AUD/CAD">AUD/CAD</option>
+                    <option value="NZD/USD">NZD/USD</option>
+                    <option value="EUR/GBP">EUR/GBP</option>
+                </select>
+
+                <label for="time-select">Escolha o Tempo:</label>
+                <select id="time-select" class="dropdown">
+                    <option value="1 MIN">1 MIN</option>
+                    <option value="5 MIN">5 MIN</option>
+                    <option value="15 MIN">15 MIN</option>
+                    <option value="30 MIN">30 MIN</option>
+                </select>
+            </div>
+            <div class="box" id="manual-signal-panel">
+                <h4 id="manual-signal-pair">Ativo Selecionado</h4>
+                <p id="manual-signal-message" class="signal-message">Aguardando sinal...</p>
+            </div>
+            <button class="get-signal">Gerar Sinal Manual</button>
+        </div>
+
+        <!-- Divisor -->
+        <hr class="divider">
+
+        <!-- Painel de Sinais Automáticos -->
+        <div class="section">
+            <h3 class="section-title">Sinais Automáticos</h3>
+            <div class="box" id="auto-signal-panel">
+                <ul id="auto-signal-list" class="signal-list">
+                    <li class="signal-message">Nenhum sinal gerado automaticamente ainda.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Links Externos -->
+        <div class="external-links">
+            <a href="https://t.me/+4F-jO5pTnSoxNWYx" target="_blank" class="btn-link">Comunidade GT Sniper (Telegram)</a>
+            <a href="https://t.me/+1mCTz2Kk_IQ4ZDlh" target="_blank" class="btn-link">Canal Oficial GT Sniper (Telegram)</a>
+            <a href="https://tradergtsniper.com.br/comunidade" target="_blank" class="btn-link">Site Comunidade GT Sniper</a>
+            <a href="https://atlasbroker.io/?ref=673" target="_blank" class="btn-link">Corretora Atlas Broker</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,152 @@
+/* Estilo Geral */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1e1e1e; /* Fundo escuro */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Container Principal */
+.container {
+    background-color: #292929;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+/* Logo */
+.logo {
+    margin-bottom: 20px;
+}
+
+.logo-img {
+    max-width: 120px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+/* Títulos das Seções */
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #f5c518; /* Amarelo para destacar títulos */
+}
+
+/* Painéis de Sinais */
+.box {
+    background-color: #444;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+.signal-message {
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.signal-message.buy {
+    background-color: #4caf50; /* Verde para compra */
+}
+
+.signal-message.sell {
+    background-color: #f44336; /* Vermelho para venda */
+}
+
+.signal-list {
+    list-style: none;
+    padding: 0;
+}
+
+.signal-list li {
+    margin-bottom: 10px;
+}
+
+/* Dropdowns */
+.dropdown {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #333;
+    color: white;
+}
+
+/* Botões */
+.get-signal {
+    background-color: #f5c518;
+    color: #1e1e1e;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+.get-signal:hover {
+    background-color: #e4b90f;
+    transform: scale(1.05);
+}
+
+/* Links Externos */
+.external-links {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.external-links a {
+    display: block;
+    margin: 10px 0;
+    padding: 10px 15px;
+    background-color: #f5c518;
+    color: #1e1e1e;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.external-links a:hover {
+    background-color: #e4b90f;
+    transform: scale(1.05);
+}
+
+/* Divisor */
+.divider {
+    border: 0;
+    height: 1px;
+    background: #555;
+    margin: 20px 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .logo-img {
+        max-width: 100px;
+    }
+}
