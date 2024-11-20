@@ -1,105 +1,74 @@
-/* Geral */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #000;
-    color: #FFD700;
     margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    font-family: 'Arial', sans-serif;
+    background: #1e1e2f;
+    color: #ffffff;
 }
 
-/* Cabeçalho */
-.main-header {
+.header {
+    background: linear-gradient(90deg, #ffcc00, #ff9900);
     text-align: center;
-    margin-top: 20px;
+    padding: 20px;
 }
 
-.main-header h1 {
-    font-size: 2.5rem;
-    color: #FFD700;
-    text-transform: uppercase;
+.header h1 {
     margin: 0;
+    font-size: 2rem;
+    color: #000;
 }
 
-.main-header p {
+.header p {
+    margin: 5px 0;
     font-size: 1.2rem;
-    color: #fff;
-    margin-top: 10px;
+    color: #333;
 }
 
-/* Container de Sinais */
-.sinais-container {
-    width: 90%;
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 10px;
-    border: 2px solid #FFD700;
+.main {
+    padding: 20px;
+}
+
+.signals-container {
+    max-width: 600px;
+    margin: auto;
+    background: #292939;
     border-radius: 10px;
-    background-color: #222;
-}
-
-.sinais-container h2 {
+    box-shadow: 0px 0px 10px #000;
+    padding: 20px;
     text-align: center;
-    font-size: 1.8rem;
-    color: #FFD700;
 }
 
-#sinais-list {
+.signals-container h2 {
+    color: #ffcc00;
+}
+
+.signals {
     margin-top: 10px;
 }
 
-/* Estilo dos Sinais */
-.signal-card {
-    background-color: #333;
-    border: 1px solid #FFD700;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 10px;
-    color: #fff;
-    text-align: center;
-    font-size: 1rem;
-}
-
-/* Botões e Links */
-.links-container {
-    margin-top: 20px;
-    width: 90%;
-    max-width: 800px;
-    text-align: center;
-}
-
-.links-container h3 {
-    font-size: 1.5rem;
-    color: #FFD700;
-    margin-bottom: 10px;
-}
-
-.button-link {
-    display: inline-block;
-    background-color: #FFD700;
-    color: #000;
-    text-decoration: none;
-    padding: 10px 15px;
+.signals .signal-item {
+    background: #333;
+    margin: 10px 0;
+    padding: 15px;
     border-radius: 5px;
-    margin: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    text-align: left;
+    box-shadow: 0px 0px 5px #000;
+    color: #ffcc00;
 }
 
-.button-link:hover {
-    background-color: #FFC107;
-    color: #000;
-}
-
-/* Rodapé */
-footer {
+.footer {
     text-align: center;
-    margin-top: 20px;
-    padding: 10px 0;
-    font-size: 0.9rem;
-    color: #FFD700;
-    border-top: 1px solid #FFD700;
-    width: 100%;
+    padding: 10px;
+    background: #222;
+    color: #fff;
+}
+
+.footer .links a {
+    margin: 0 10px;
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer .links a:hover {
+    text-decoration: underline;
 }

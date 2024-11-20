@@ -1,28 +1,35 @@
 from flask import Flask, jsonify
-from flask_cors import CORS
 from iqoptionapi.stable_api import IQ_Option
 import time
 
-# Credenciais da IQ Option
-EMAIL = "benitonetomontalto@gmail.com"
+# Suas credenciais da IQ Option
+LOGIN = "benitonetomontalto@gmail.com"
 SENHA = "benito200411"
 
-# Configuração do Flask
 app = Flask(__name__)
-CORS(app)
 
-# Função para conectar na IQ Option
+# Configuração do CORS para evitar problemas de conexão
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization"
+    response.headers["Access-Control-Allow-Methods"] = "GET,PUT,POST,DELETE,OPTIONS"
+    return response
+
 def conectar_iq_option():
-    iq = IQ_Option(EMAIL, SENHA)
-    conectado, motivo = iq.connect()
-    if conectado:
-        print("Conectado com sucesso à IQ Option.")
-        return iq
-    else:
-        print(f"Erro ao conectar: {motivo}")
+    try:
+        iq = IQ_Option(LOGIN, SENHA)
+        check, reason = iq.connect()
+        if check:
+            print("Conexão com IQ Option realizada com sucesso!")
+            return iq
+        else:
+            print(f"Erro ao conectar na IQ Option: {reason}")
+            return None
+    except Exception as e:
+        print(f"Erro ao tentar conectar: {e}")
         return None
 
-# Rota para gerar sinais
 @app.route('/sinais', methods=['GET'])
 def gerar_sinais():
     try:
@@ -41,8 +48,8 @@ def gerar_sinais():
                 ultimo_preco = velas[-1]['close']
                 penultimo_preco = velas[-2]['close']
 
-                sinal = "compra" if ultimo_preco > penultimo_preco else "venda"
-                sinais.append({"ativo": ativo, "sinal": sinal, "timeframe": timeframe})
+                sinal = "COMPRA" if ultimo_preco > penultimo_preco else "VENDA"
+                sinais.append({"ativo": ativo, "sinal": sinal, "timeframe": f"{timeframe} min"})
             except Exception as e:
                 print(f"Erro ao obter velas para {ativo}: {e}")
                 continue
@@ -52,6 +59,5 @@ def gerar_sinais():
         print(f"Erro interno no servidor: {e}")
         return jsonify({"status": "error", "message": "Erro interno no servidor"}), 500
 
-# Inicialização do servidor
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True)
