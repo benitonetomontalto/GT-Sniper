@@ -1,4 +1,4 @@
-// Lista de paridades disponíveis na ferramenta
+// Lista de paridades disponíveis
 const pairs = ["EUR/USD", "GBP/USD", "USD/JPY", "AUD/USD", "EUR/JPY", "CAD/JPY", "AUD/CAD", "NZD/USD", "EUR/GBP"];
 
 // Chave da API
@@ -13,10 +13,8 @@ async function fetchForexPrices() {
             throw new Error(`Erro na API: Status ${response.status}`);
         }
         const data = await response.json();
-        if (!data.success) {
-            throw new Error(`Erro da API: ${data.error.info}`);
-        }
-        return data.rates;
+        console.log("Dados recebidos da API:", data);
+        return data.rates || null;
     } catch (error) {
         console.error("Erro ao buscar dados de Forex:", error.message);
         return null;
@@ -25,6 +23,11 @@ async function fetchForexPrices() {
 
 // Converte os preços para as paridades
 function convertPrices(baseRates) {
+    if (!baseRates || Object.keys(baseRates).length === 0) {
+        console.error("Dados da API incompletos ou inválidos.");
+        return {};
+    }
+
     const priceData = {};
     pairs.forEach(pair => {
         const [base, quote] = pair.split("/");
@@ -34,26 +37,46 @@ function convertPrices(baseRates) {
             );
         }
     });
+    console.log("Preços convertidos para paridades:", priceData);
     return priceData;
+}
+
+// Função para calcular a SMA
+function calculateSMA(data, period) {
+    if (!data || data.length < period) return null;
+    const sum = data.slice(0, period).reduce((a, b) => a + b, 0);
+    return sum / period;
 }
 
 // Estratégia para gerar sinais
 function generateStrategySignal(data) {
+    if (!data) return null;
     const shortSMA = calculateSMA(data, 5);
     const longSMA = calculateSMA(data, 10);
+
+    console.log("Short SMA:", shortSMA, "Long SMA:", longSMA);
+
     if (shortSMA && longSMA) {
         if (shortSMA > longSMA) return { action: "BUY", message: "Compre Agora!" };
-        else if (shortSMA < longSMA) return { action: "SELL", message: "Venda Agora!" };
+        if (shortSMA < longSMA) return { action: "SELL", message: "Venda Agora!" };
     }
     return null;
 }
 
 // Busca Manual
 async function manualSignal() {
+    console.log("Função manualSignal chamada");
     const rates = await fetchForexPrices();
+    if (!rates) {
+        console.error("Erro ao buscar taxas. Verifique a API.");
+        return;
+    }
+
     const selectedPair = document.getElementById("pair-select").value;
     const priceData = convertPrices(rates);
     const data = priceData[selectedPair];
+
+    console.log("Dados para SMA do par selecionado:", data);
 
     const signal = generateStrategySignal(data);
 
@@ -69,7 +92,13 @@ async function manualSignal() {
 
 // Busca Automática
 async function autoUpdateSignals() {
+    console.log("Atualizando sinais automáticos...");
     const rates = await fetchForexPrices();
+    if (!rates) {
+        console.error("Erro ao buscar taxas. Verifique a API.");
+        return;
+    }
+
     const priceData = convertPrices(rates);
     const signalList = document.getElementById("auto-signal-list");
     signalList.innerHTML = ""; // Limpa a lista

@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GT Sniper</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <script>
+        // Registrar o Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(() => console.log('Service Worker registrado com sucesso.'))
+                .catch(error => console.error('Erro ao registrar o Service Worker:', error));
+        }
+    </script>
 </head>
 <body>
     <div class="container">
