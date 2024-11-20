@@ -1,84 +1,97 @@
+/* Configurações gerais */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #000000;
-    color: #FFD700;
+    background: linear-gradient(to right, #1a1a2e, #16213e);
+    color: #ffffff;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    background: #0f3460;
+    padding: 20px;
     text-align: center;
 }
 
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
+.header .logo img {
+    max-width: 100px;
+    border-radius: 50%;
 }
 
-.logo-img {
-    width: 200px;
-    margin-bottom: 20px;
+.header h1 {
+    font-size: 2.5em;
+    color: #e94560;
+    margin: 10px 0 0;
 }
 
-.status {
-    font-size: 1.2em;
-    color: lime;
-    margin-bottom: 15px;
+.main-content {
+    width: 80%;
+    max-width: 1200px;
+    margin: 20px auto;
 }
 
 .section-title {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.box {
-    border: 1px solid #FFD700;
-    border-radius: 10px;
-    padding: 20px;
+    text-align: center;
+    font-size: 2em;
     margin-bottom: 20px;
-    text-align: left;
-    background: rgba(0, 0, 0, 0.8);
+    color: #e94560;
 }
 
-.signal-message {
-    font-size: 1.2em;
+.signals-box {
+    background: #16213e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.signals-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.signals-box li {
+    background: #1a1a2e;
     margin: 10px 0;
     padding: 10px;
     border-radius: 5px;
-    color: white;
-    background-color: #000000;
+    border: 1px solid #e94560;
+    color: #ffffff;
 }
 
-.signal-message.buy {
-    background-color: #008000;
+.links-section {
+    margin-top: 40px;
 }
 
-.signal-message.sell {
-    background-color: #FF0000;
+.links-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
 }
 
 .btn-link {
-    display: inline-block;
-    margin: 10px;
-    padding: 10px 15px;
-    color: white;
-    background: #FFD700;
     text-decoration: none;
+    padding: 10px 20px;
+    background: #e94560;
+    color: #ffffff;
     border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
 }
 
 .btn-link:hover {
-    background: #FFC300;
+    background: #0f3460;
+    color: #e94560;
 }
 
-.get-signal {
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: #FFD700;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.get-signal:hover {
-    background-color: #FFC300;
+.footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #ffffff;
 }

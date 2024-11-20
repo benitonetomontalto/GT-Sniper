@@ -6,8 +6,8 @@
     <title>GT Sniper</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="manifest" href="./manifest.json">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <script>
+        // Registrar o Service Worker
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('service-worker.js')
                 .then(() => console.log('Service Worker registrado com sucesso.'))
@@ -16,69 +16,36 @@
     </script>
 </head>
 <body>
-    <div class="container">
-        <!-- Status de Conexão -->
-        <div id="connection-status" class="status">Verificando conexão...</div>
-
-        <!-- Logo -->
+    <header class="header">
         <div class="logo">
-            <img src="img/gtsniper.jpeg" alt="Logotipo do GT Sniper" class="logo-img">
+            <img src="img/gtsniper.jpeg" alt="Logotipo do GT Sniper">
+            <h1>GT Sniper</h1>
         </div>
+    </header>
 
-        <!-- Painel de Sinais Manuais -->
-        <div class="section">
-            <h3 class="section-title">Sinais Manuais</h3>
-            <div class="selection-panel">
-                <label for="pair-select">Escolha o Ativo:</label>
-                <select id="pair-select" class="dropdown">
-                    <option value="EUR/USD">EUR/USD</option>
-                    <option value="GBP/USD">GBP/USD</option>
-                    <option value="USD/JPY">USD/JPY</option>
-                    <option value="AUD/USD">AUD/USD</option>
-                    <option value="EUR/JPY">EUR/JPY</option>
-                    <option value="CAD/JPY">CAD/JPY</option>
-                    <option value="AUD/CAD">AUD/CAD</option>
-                    <option value="NZD/USD">NZD/USD</option>
-                    <option value="EUR/GBP">EUR/GBP</option>
-                </select>
-
-                <label for="time-select">Escolha o Tempo:</label>
-                <select id="time-select" class="dropdown">
-                    <option value="M1">M1</option>
-                    <option value="M5">M5</option>
-                    <option value="M15">M15</option>
-                    <option value="M30">M30</option>
-                </select>
-            </div>
-            <div class="box" id="manual-signal-panel">
-                <h4 id="manual-signal-pair">Ativo Selecionado</h4>
-                <p id="manual-signal-message" class="signal-message">Aguardando sinal...</p>
-            </div>
-            <button class="get-signal">Gerar Sinal Manual</button>
-        </div>
-
-        <!-- Divisor -->
-        <hr class="divider">
-
-        <!-- Painel de Sinais Automáticos -->
-        <div class="section">
-            <h3 class="section-title">Sinais Automáticos</h3>
-            <div class="box" id="auto-signal-panel">
-                <ul id="auto-signal-list" class="signal-list">
-                    <li class="signal-message">Nenhum sinal gerado automaticamente ainda.</li>
+    <main class="main-content">
+        <section class="signals-section">
+            <h2 class="section-title">Sinais Automáticos</h2>
+            <div class="signals-box">
+                <ul id="signals-list">
+                    <li>Aguardando sinais...</li>
                 </ul>
             </div>
-        </div>
+        </section>
 
-        <!-- Links Externos -->
-        <div class="external-links">
-            <a href="https://t.me/+4F-jO5pTnSoxNWYx" target="_blank" class="btn-link">Comunidade GT Sniper (Telegram)</a>
-            <a href="https://t.me/+1mCTz2Kk_IQ4ZDlh" target="_blank" class="btn-link">Canal Oficial GT Sniper (Telegram)</a>
-            <a href="https://tradergtsniper.com.br/comunidade" target="_blank" class="btn-link">Site Comunidade GT Sniper</a>
-            <a href="https://atlasbroker.io/?ref=673" target="_blank" class="btn-link">Corretora Atlas Broker</a>
-        </div>
-    </div>
+        <section class="links-section">
+            <h2 class="section-title">Links Importantes</h2>
+            <div class="links-box">
+                <a href="https://t.me/+4F-jO5pTnSoxNWYx" target="_blank" class="btn-link">Comunidade Telegram</a>
+                <a href="https://t.me/+1mCTz2Kk_IQ4ZDlh" target="_blank" class="btn-link">Canal Oficial Telegram</a>
+                <a href="https://tradergtsniper.com.br/comunidade" target="_blank" class="btn-link">Site da Comunidade</a>
+                <a href="https://atlasbroker.io/?ref=673" target="_blank" class="btn-link">Corretora Atlas Broker</a>
+            </div>
+        </section>
+    </main>
 
-    <script src="js/script.js"></script>
+    <footer class="footer">
+        <p>© 2024 GT Sniper - Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>
