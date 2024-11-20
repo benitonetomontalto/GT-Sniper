@@ -6,10 +6,10 @@ self.addEventListener('install', event => {
                 './',
                 './index.html',
                 './css/style.css',
-                './img/gtsniper-192.png',
-                './img/gtsniper-512.png',
-                './manifest.json',
-                './favicon.ico'
+                './img/icon-192.png',
+                './img/icon-512.png',
+                './img/gtsniper.jpeg',
+                './manifest.json'
             ]);
         })
     );
