@@ -13,6 +13,7 @@ async function checkConnection() {
         } else {
             connectionStatus.textContent = "Erro de conexão com a API.";
             connectionStatus.style.color = "red";
+            console.error("Erro da API:", data.error.info);
         }
     } catch (error) {
         connectionStatus.textContent = "Erro ao conectar à API.";
