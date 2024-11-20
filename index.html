@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GT Sniper</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" href="./img/gtsniper.jpeg">
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('service-worker.js')
@@ -17,10 +18,11 @@
 </head>
 <body>
     <div class="container">
-        <!-- Logo -->
-        <div class="logo">
-            <img src="img/gtsniper.jpeg" alt="Logotipo do GT Sniper" class="logo-img">
-        </div>
+        <!-- Header -->
+        <header class="header">
+            <h1>GT SNIPER</h1>
+            <p>A Ferramenta do Futuro para Traders</p>
+        </header>
 
         <!-- Painel de Sinais Manuais -->
         <div class="section">
@@ -37,14 +39,6 @@
                     <option value="AUD/CAD">AUD/CAD</option>
                     <option value="NZD/USD">NZD/USD</option>
                     <option value="EUR/GBP">EUR/GBP</option>
-                </select>
-
-                <label for="time-select">Escolha o Tempo:</label>
-                <select id="time-select" class="dropdown">
-                    <option value="1 MIN">1 MIN</option>
-                    <option value="5 MIN">5 MIN</option>
-                    <option value="15 MIN">15 MIN</option>
-                    <option value="30 MIN">30 MIN</option>
                 </select>
             </div>
             <div class="box" id="manual-signal-panel">
@@ -69,11 +63,17 @@
 
         <!-- Links Externos -->
         <div class="external-links">
+            <h3 class="section-title">Acesse Mais:</h3>
             <a href="https://t.me/+4F-jO5pTnSoxNWYx" target="_blank" class="btn-link">Comunidade GT Sniper (Telegram)</a>
             <a href="https://t.me/+1mCTz2Kk_IQ4ZDlh" target="_blank" class="btn-link">Canal Oficial GT Sniper (Telegram)</a>
             <a href="https://tradergtsniper.com.br/comunidade" target="_blank" class="btn-link">Site Comunidade GT Sniper</a>
             <a href="https://atlasbroker.io/?ref=673" target="_blank" class="btn-link">Corretora Atlas Broker</a>
         </div>
+
+        <!-- Rodapé -->
+        <footer class="footer">
+            <p>GT Sniper - © 2024. Ferramenta para traders avançados.</p>
+        </footer>
     </div>
 </body>
 </html>
