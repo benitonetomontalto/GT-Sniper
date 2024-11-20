@@ -6,8 +6,9 @@ self.addEventListener('install', event => {
                 './',
                 './index.html',
                 './css/style.css',
-                './img/imgicon-192.png',
-                './img/imgicon-512.png',
+                './js/script.js',
+                './img/gtsniper.jpeg',
+                './favicon.ico',
                 './manifest.json'
             ]);
         })
