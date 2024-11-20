@@ -4,33 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GT Sniper</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/gtsniper.jpeg" type="image/x-icon">
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <h1>GT Sniper</h1>
-            <p>IA conectada e pronta para gerar sinais</p>
+    <div class="container">
+        <div class="logo">
+            <img src="img/gtsniper.jpeg" alt="GT Sniper Logo">
         </div>
-    </header>
-    <main class="main">
-        <div class="signals-container">
-            <h2>Sinais Automáticos</h2>
-            <div id="signals" class="signals"></div>
-        </div>
-    </main>
-    <footer class="footer">
-        <div class="container">
-            <p>© 2024 GT Sniper - Todos os direitos reservados</p>
-            <div class="links">
-                <a href="#">Comunidade GT Sniper</a>
-                <a href="#">Canal Oficial GT Sniper</a>
-                <a href="#">Site Comunidade</a>
-                <a href="#">Corretora Atlas Broker</a>
+        <div class="signal-box">
+            <div class="asset">
+                <span class="label">Paridade:</span>
+                <span id="asset-name">EURUSD</span>
+            </div>
+            <div class="signal">
+                <span class="label">Sinal:</span>
+                <span id="signal-type" class="signal-sell">VENDA</span>
+            </div>
+            <div class="timeframe">
+                <span class="label">Prazo:</span>
+                <span id="signal-timeframe">1 MIN</span>
             </div>
         </div>
-    </footer>
-    <script src="./js/script.js"></script>
+        <button id="next-signal" class="next-signal-btn">PRÓXIMO SINAL</button>
+        <div class="links">
+            <a href="https://t.me/GT_Sniper" target="_blank">Comunidade GT Sniper (Telegram)</a>
+            <a href="https://t.me/GT_Sniper_Official" target="_blank">Canal Oficial GT Sniper (Telegram)</a>
+            <a href="https://www.gtsniper.com" target="_blank">Site Comunidade GT Sniper</a>
+            <a href="https://www.atlasbroker.com" target="_blank">Corretora Atlas Broker</a>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
 </body>
 </html>

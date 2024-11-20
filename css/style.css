@@ -1,74 +1,79 @@
 body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background: #1e1e2f;
-    color: #ffffff;
-}
-
-.header {
-    background: linear-gradient(90deg, #ffcc00, #ff9900);
+    background-color: #000;
+    color: #FFD700;
+    font-family: Arial, sans-serif;
     text-align: center;
-    padding: 20px;
-}
-
-.header h1 {
     margin: 0;
-    font-size: 2rem;
-    color: #000;
+    padding: 0;
 }
 
-.header p {
-    margin: 5px 0;
-    font-size: 1.2rem;
-    color: #333;
-}
-
-.main {
+.container {
+    max-width: 400px;
+    margin: 0 auto;
     padding: 20px;
 }
 
-.signals-container {
-    max-width: 600px;
-    margin: auto;
-    background: #292939;
+.logo img {
+    width: 120px;
+    margin: 20px auto;
+}
+
+.signal-box {
+    background-color: #333;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px #000;
     padding: 20px;
-    text-align: center;
+    margin: 20px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.signals-container h2 {
-    color: #ffcc00;
-}
-
-.signals {
-    margin-top: 10px;
-}
-
-.signals .signal-item {
-    background: #333;
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 5px;
-    text-align: left;
-    box-shadow: 0px 0px 5px #000;
-    color: #ffcc00;
-}
-
-.footer {
-    text-align: center;
-    padding: 10px;
-    background: #222;
-    color: #fff;
-}
-
-.footer .links a {
-    margin: 0 10px;
-    color: #ffcc00;
-    text-decoration: none;
+.signal-box .label {
     font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.2em;
 }
 
-.footer .links a:hover {
-    text-decoration: underline;
+.asset, .signal, .timeframe {
+    margin: 15px 0;
+    font-size: 1.5em;
+}
+
+.signal-sell {
+    color: #FF4444;
+}
+
+.signal-buy {
+    color: #44FF44;
+}
+
+.next-signal-btn {
+    background-color: #FFD700;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.next-signal-btn:hover {
+    background-color: #FFC107;
+}
+
+.links {
+    margin-top: 20px;
+}
+
+.links a {
+    color: #FFD700;
+    text-decoration: none;
+    display: block;
+    margin: 5px 0;
+    font-size: 1em;
+}
+
+.links a:hover {
+    color: #FFC107;
 }
