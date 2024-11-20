@@ -1,97 +1,105 @@
-/* Configurações gerais */
+/* Geral */
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(to right, #1a1a2e, #16213e);
-    color: #ffffff;
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #FFD700;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
-.header {
-    background: #0f3460;
-    padding: 20px;
+/* Cabeçalho */
+.main-header {
     text-align: center;
-}
-
-.header .logo img {
-    max-width: 100px;
-    border-radius: 50%;
-}
-
-.header h1 {
-    font-size: 2.5em;
-    color: #e94560;
-    margin: 10px 0 0;
-}
-
-.main-content {
-    width: 80%;
-    max-width: 1200px;
-    margin: 20px auto;
-}
-
-.section-title {
-    text-align: center;
-    font-size: 2em;
-    margin-bottom: 20px;
-    color: #e94560;
-}
-
-.signals-box {
-    background: #16213e;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-}
-
-.signals-box ul {
-    list-style: none;
-    padding: 0;
-}
-
-.signals-box li {
-    background: #1a1a2e;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #e94560;
-    color: #ffffff;
-}
-
-.links-section {
-    margin-top: 40px;
-}
-
-.links-box {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-}
-
-.btn-link {
-    text-decoration: none;
-    padding: 10px 20px;
-    background: #e94560;
-    color: #ffffff;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background 0.3s;
-}
-
-.btn-link:hover {
-    background: #0f3460;
-    color: #e94560;
-}
-
-.footer {
     margin-top: 20px;
+}
+
+.main-header h1 {
+    font-size: 2.5rem;
+    color: #FFD700;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.main-header p {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-top: 10px;
+}
+
+/* Container de Sinais */
+.sinais-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 10px;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    background-color: #222;
+}
+
+.sinais-container h2 {
     text-align: center;
-    font-size: 0.9em;
-    color: #ffffff;
+    font-size: 1.8rem;
+    color: #FFD700;
+}
+
+#sinais-list {
+    margin-top: 10px;
+}
+
+/* Estilo dos Sinais */
+.signal-card {
+    background-color: #333;
+    border: 1px solid #FFD700;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-align: center;
+    font-size: 1rem;
+}
+
+/* Botões e Links */
+.links-container {
+    margin-top: 20px;
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+}
+
+.links-container h3 {
+    font-size: 1.5rem;
+    color: #FFD700;
+    margin-bottom: 10px;
+}
+
+.button-link {
+    display: inline-block;
+    background-color: #FFD700;
+    color: #000;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.button-link:hover {
+    background-color: #FFC107;
+    color: #000;
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 0;
+    font-size: 0.9rem;
+    color: #FFD700;
+    border-top: 1px solid #FFD700;
+    width: 100%;
 }

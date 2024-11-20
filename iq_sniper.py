@@ -1,45 +1,41 @@
+from flask import Flask, jsonify, request
 from iqoptionapi.stable_api import IQ_Option
 import time
 
-# Credenciais da IQ Option
-email = "benitonetomontalto@gmail.com"
-password = "benito200411"
+app = Flask(__name__)
 
-# Conexão com a API
-print("Conectando à IQ Option...")
-iq = IQ_Option(email, password)
-iq.connect()
+def conectar_iq_option():
+    iq = IQ_Option("benitonetomontalto@gmail.com", "benito200411")
+    iq.connect()
+    if iq.check_connect():
+        print("Conectado com sucesso!")
+        return iq
+    else:
+        print("Falha ao conectar.")
+        return None
 
-if iq.check_connect():
-    print("IA conectada e pronta para gerar sinais!")
-else:
-    print("Erro ao conectar à IQ Option. Verifique suas credenciais.")
-    exit()
-
-# Função para buscar velas e gerar sinais
-def gerar_sinais(ativo, timeframe):
+@app.route('/sinais', methods=['GET'])
+def gerar_sinais():
     try:
-        velas = iq.get_candles(ativo, timeframe * 60, 10, time.time())
-        print(f"\nVelas recebidas para {ativo} (Timeframe {timeframe} min):")
-        for vela in velas:
-            print(vela)
+        iq = conectar_iq_option()
+        if not iq:
+            return jsonify({"status": "error", "message": "Erro ao conectar na API"}), 500
 
-        # Lógica de exemplo para gerar sinais
-        if velas[-1]['close'] > velas[-2]['close']:
-            print(f"SINAL DE COMPRA para {ativo} no timeframe {timeframe}!")
-        elif velas[-1]['close'] < velas[-2]['close']:
-            print(f"SINAL DE VENDA para {ativo} no timeframe {timeframe}!")
-        else:
-            print(f"Nenhum sinal gerado para {ativo}.")
+        paridades = ["EURUSD", "GBPUSD", "USDJPY", "AUDUSD"]
+        timeframe = 1
+        sinais = []
+
+        for ativo in paridades:
+            velas = iq.get_candles(ativo, 60, 3, time.time())
+            ultimo_preco = velas[-1]['close']
+            penultimo_preco = velas[-2]['close']
+            sinal = "compra" if ultimo_preco > penultimo_preco else "venda"
+            sinais.append({"ativo": ativo, "sinal": sinal, "timeframe": timeframe})
+
+        return jsonify({"status": "success", "sinais": sinais})
     except Exception as e:
-        print(f"Erro ao buscar velas ou gerar sinais para {ativo}: {e}")
+        print(f"Erro interno no servidor: {e}")
+        return jsonify({"status": "error", "message": "Erro interno no servidor"}), 500
 
-# Lista de ativos e configuração de timeframe
-ativos = ["EURUSD", "GBPUSD", "USDJPY"]  # Adicione as paridades desejadas
-timeframe = 1  # Timeframe em minutos
-
-# Loop para geração contínua de sinais
-while True:
-    for ativo in ativos:
-        gerar_sinais(ativo, timeframe)
-    time.sleep(10)  # Aguarde 10 segundos antes de repetir o processo
+if __name__ == '__main__':
+    app.run(debug=True)

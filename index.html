@@ -3,49 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GT Sniper</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="manifest" href="./manifest.json">
-    <script>
-        // Registrar o Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js')
-                .then(() => console.log('Service Worker registrado com sucesso.'))
-                .catch(error => console.error('Erro ao registrar o Service Worker:', error));
-        }
-    </script>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <title>GT Sniper</title>
 </head>
 <body>
-    <header class="header">
-        <div class="logo">
-            <img src="img/gtsniper.jpeg" alt="Logotipo do GT Sniper">
-            <h1>GT Sniper</h1>
-        </div>
+    <header class="main-header">
+        <h1>GT Sniper</h1>
+        <p>IA conectada e pronta para gerar sinais!</p>
     </header>
-
-    <main class="main-content">
-        <section class="signals-section">
-            <h2 class="section-title">Sinais Automáticos</h2>
-            <div class="signals-box">
-                <ul id="signals-list">
-                    <li>Aguardando sinais...</li>
-                </ul>
+    <main>
+        <section class="sinais-container">
+            <h2>Sinais Automáticos</h2>
+            <div id="sinais-list">
+                <!-- Os sinais serão gerados dinamicamente -->
             </div>
         </section>
-
-        <section class="links-section">
-            <h2 class="section-title">Links Importantes</h2>
-            <div class="links-box">
-                <a href="https://t.me/+4F-jO5pTnSoxNWYx" target="_blank" class="btn-link">Comunidade Telegram</a>
-                <a href="https://t.me/+1mCTz2Kk_IQ4ZDlh" target="_blank" class="btn-link">Canal Oficial Telegram</a>
-                <a href="https://tradergtsniper.com.br/comunidade" target="_blank" class="btn-link">Site da Comunidade</a>
-                <a href="https://atlasbroker.io/?ref=673" target="_blank" class="btn-link">Corretora Atlas Broker</a>
+        <section class="links-container">
+            <h3>Links Úteis</h3>
+            <div class="links">
+                <a href="https://telegram.me/GT_Sniper" target="_blank" class="button-link">Comunidade GT Sniper</a>
+                <a href="https://telegram.me/Canal_GT_Sniper" target="_blank" class="button-link">Canal Oficial GT Sniper</a>
+                <a href="https://site.gt_sniper.com" target="_blank" class="button-link">Site Oficial</a>
+                <a href="https://corretora.gt_sniper.com" target="_blank" class="button-link">Corretora Parceira</a>
             </div>
         </section>
     </main>
-
-    <footer class="footer">
-        <p>© 2024 GT Sniper - Todos os direitos reservados.</p>
+    <footer>
+        <p>&copy; 2024 GT Sniper. Todos os direitos reservados.</p>
     </footer>
+    <script src="js/script.js"></script>
 </body>
 </html>

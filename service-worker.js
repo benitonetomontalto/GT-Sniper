@@ -1,18 +1,17 @@
 self.addEventListener('install', event => {
-    console.log('Service Worker instalado.');
     event.waitUntil(
-        caches.open('gt-sniper-cache').then(cache => {
+        caches.open('gt-sniper-v1').then(cache => {
             return cache.addAll([
                 './',
                 './index.html',
                 './css/style.css',
                 './js/script.js',
                 './img/gtsniper.jpeg',
-                './favicon.ico',
-                './manifest.json'
+                './favicon.ico'
             ]);
         })
     );
+    console.log('Service Worker instalado.');
 });
 
 self.addEventListener('fetch', event => {
