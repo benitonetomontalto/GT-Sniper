@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GT Sniper</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="manifest" href="./manifest.json">
-    <link rel="icon" href="./img/icon-192.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="favicon.ico">
     <script>
-        // Registrar o Service Worker
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./service-worker.js')
+            navigator.serviceWorker.register('service-worker.js')
                 .then(() => console.log('Service Worker registrado com sucesso.'))
                 .catch(error => console.error('Erro ao registrar o Service Worker:', error));
         }
@@ -33,6 +32,11 @@
                     <option value="GBP/USD">GBP/USD</option>
                     <option value="USD/JPY">USD/JPY</option>
                     <option value="AUD/USD">AUD/USD</option>
+                    <option value="EUR/JPY">EUR/JPY</option>
+                    <option value="CAD/JPY">CAD/JPY</option>
+                    <option value="AUD/CAD">AUD/CAD</option>
+                    <option value="NZD/USD">NZD/USD</option>
+                    <option value="EUR/GBP">EUR/GBP</option>
                 </select>
 
                 <label for="time-select">Escolha o Tempo:</label>
@@ -61,6 +65,14 @@
                     <li class="signal-message">Nenhum sinal gerado automaticamente ainda.</li>
                 </ul>
             </div>
+        </div>
+
+        <!-- Links Externos -->
+        <div class="external-links">
+            <a href="https://t.me/+4F-jO5pTnSoxNWYx" target="_blank" class="btn-link">Comunidade GT Sniper (Telegram)</a>
+            <a href="https://t.me/+1mCTz2Kk_IQ4ZDlh" target="_blank" class="btn-link">Canal Oficial GT Sniper (Telegram)</a>
+            <a href="https://tradergtsniper.com.br/comunidade" target="_blank" class="btn-link">Site Comunidade GT Sniper</a>
+            <a href="https://atlasbroker.io/?ref=673" target="_blank" class="btn-link">Corretora Atlas Broker</a>
         </div>
     </div>
 </body>
