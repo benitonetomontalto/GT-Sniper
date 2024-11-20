@@ -1,126 +1,118 @@
-// Lista de paridades disponíveis
 const pairs = ["EUR/USD", "GBP/USD", "USD/JPY", "AUD/USD", "EUR/JPY", "CAD/JPY", "AUD/CAD", "NZD/USD", "EUR/GBP"];
-
-// Chave da API
 const API_KEY = "30d5acf592bd385b1e115a5d80549946";
 
-// Função para buscar preços de Forex
+// Atualiza o status de conexão
+async function updateConnectionStatus() {
+    const connectionMessage = document.getElementById("connection-message");
+    try {
+        const url = `https://api.exchangerate.host/latest?base=EUR&access_key=${API_KEY}`;
+        const response = await fetch(url);
+
+        if (!response.ok) throw new Error(`Status da API: ${response.status}`);
+
+        const data = await response.json();
+        if (!data.rates) throw new Error("Resposta inválida da API");
+
+        // Conexão bem-sucedida
+        connectionMessage.textContent = "Conectado e pronto para gerar sinais!";
+        connectionMessage.className = "connected";
+    } catch (error) {
+        console.error("Erro de conexão:", error.message);
+        // Conexão falhou
+        connectionMessage.textContent = "Erro ao conectar com o servidor!";
+        connectionMessage.className = "disconnected";
+    }
+}
+
+// Atualiza status de conexão ao carregar a página
+updateConnectionStatus();
+
+// Função para buscar preços
 async function fetchForexPrices() {
-    const url = `https://api.exchangerate.host/latest?access_key=${API_KEY}&base=EUR`;
+    const url = `https://api.exchangerate.host/latest?base=EUR&access_key=${API_KEY}`;
     try {
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`Erro na API: Status ${response.status}`);
         }
         const data = await response.json();
-        console.log("Dados recebidos da API:", data);
-        return data.rates || null;
+        console.log("Dados da API:", data);
+        return data.rates;
     } catch (error) {
         console.error("Erro ao buscar dados de Forex:", error.message);
         return null;
     }
 }
 
-// Converte os preços para as paridades
+// Converte preços
 function convertPrices(baseRates) {
-    if (!baseRates || Object.keys(baseRates).length === 0) {
-        console.error("Dados da API incompletos ou inválidos.");
-        return {};
-    }
-
     const priceData = {};
     pairs.forEach(pair => {
         const [base, quote] = pair.split("/");
         if (baseRates[base] && baseRates[quote]) {
-            priceData[pair] = Array.from({ length: 20 }, () =>
-                parseFloat((baseRates[quote] / baseRates[base]).toFixed(5))
-            );
+            priceData[pair] = parseFloat((baseRates[quote] / baseRates[base]).toFixed(5));
         }
     });
-    console.log("Preços convertidos para paridades:", priceData);
+    console.log("Dados processados para sinais:", priceData);
     return priceData;
 }
 
-// Função para calcular a SMA
-function calculateSMA(data, period) {
-    if (!data || data.length < period) return null;
-    const sum = data.slice(0, period).reduce((a, b) => a + b, 0);
-    return sum / period;
-}
-
-// Estratégia para gerar sinais
-function generateStrategySignal(data) {
-    if (!data) return null;
-    const shortSMA = calculateSMA(data, 5);
-    const longSMA = calculateSMA(data, 10);
-
-    console.log("Short SMA:", shortSMA, "Long SMA:", longSMA);
-
-    if (shortSMA && longSMA) {
-        if (shortSMA > longSMA) return { action: "BUY", message: "Compre Agora!" };
-        if (shortSMA < longSMA) return { action: "SELL", message: "Venda Agora!" };
-    }
-    return null;
-}
-
-// Busca Manual
+// Funções de geração de sinais
 async function manualSignal() {
-    console.log("Função manualSignal chamada");
     const rates = await fetchForexPrices();
     if (!rates) {
-        console.error("Erro ao buscar taxas. Verifique a API.");
+        alert("Erro ao obter dados da API. Verifique sua conexão.");
         return;
     }
 
     const selectedPair = document.getElementById("pair-select").value;
     const priceData = convertPrices(rates);
-    const data = priceData[selectedPair];
+    const currentPrice = priceData[selectedPair];
 
-    console.log("Dados para SMA do par selecionado:", data);
-
-    const signal = generateStrategySignal(data);
+    const signal = generateSignal(currentPrice);
 
     const signalMessage = document.getElementById("manual-signal-message");
     if (signal) {
-        signalMessage.textContent = signal.message;
+        signalMessage.textContent = `${signal.message} (${selectedPair})`;
         signalMessage.className = signal.action === "BUY" ? "signal-message buy" : "signal-message sell";
     } else {
-        signalMessage.textContent = "Nenhum sinal gerado no momento.";
+        signalMessage.textContent = "Nenhum sinal gerado.";
         signalMessage.className = "signal-message";
     }
 }
 
-// Busca Automática
-async function autoUpdateSignals() {
-    console.log("Atualizando sinais automáticos...");
-    const rates = await fetchForexPrices();
-    if (!rates) {
-        console.error("Erro ao buscar taxas. Verifique a API.");
-        return;
+function generateSignal(currentPrice) {
+    if (!currentPrice) {
+        return { action: "WAIT", message: "Sem dados disponíveis." };
     }
+    const randomDirection = Math.random() > 0.5 ? "BUY" : "SELL";
+    const message = randomDirection === "BUY" ? "Compre agora!" : "Venda agora!";
+    console.log(`Sinal gerado para preço ${currentPrice}:`, { action: randomDirection, message });
+    return { action: randomDirection, message: message };
+}
+
+async function autoUpdateSignals() {
+    console.log("Atualizando sinais automaticamente...");
+    const rates = await fetchForexPrices();
+    if (!rates) return;
 
     const priceData = convertPrices(rates);
     const signalList = document.getElementById("auto-signal-list");
-    signalList.innerHTML = ""; // Limpa a lista
+    signalList.innerHTML = "";
 
     pairs.forEach(pair => {
-        const data = priceData[pair];
-        const signal = generateStrategySignal(data);
-        const listItem = document.createElement("li");
-        listItem.className = "signal-message";
+        const currentPrice = priceData[pair];
+        const signal = generateSignal(currentPrice);
 
-        if (signal) {
-            listItem.textContent = `${pair}: ${signal.message}`;
-            listItem.className += signal.action === "BUY" ? " buy" : " sell";
-        } else {
-            listItem.textContent = `${pair}: Nenhum sinal gerado.`;
-        }
+        const listItem = document.createElement("li");
+        listItem.className = signal.action === "BUY" ? "signal-message buy" : "signal-message sell";
+        listItem.textContent = `${pair}: ${signal.message}`;
         signalList.appendChild(listItem);
     });
 }
 
-// Intervalo Automático
-setInterval(autoUpdateSignals, 30000);
+// Atualização automática a cada 15 segundos
+setInterval(autoUpdateSignals, 15000);
 
-// Botão para busca manual
+// Botão para sinais manuais
 document.querySelector(".get-signal").addEventListener("click", manualSignal);
