@@ -9,8 +9,8 @@ self.addEventListener('install', event => {
                 './js/script.js',
                 './img/imgicon-192.png',
                 './img/imgicon-512.png',
-                './manifest.json',
-                './favicon.ico'
+                './favicon.ico',
+                './manifest.json'
             ]);
         })
     );
