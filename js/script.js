@@ -1,38 +1,37 @@
-const urlBase = "http://127.0.0.1:5000";
+document.addEventListener("DOMContentLoaded", () => {
+  fetchSinaisAutomaticos();
+});
 
-// Atualizar sinais automáticos
-const atualizarSinaisAutomaticos = () => {
-    fetch(`${urlBase}/sinais`)
-        .then(response => response.json())
-        .then(data => {
-            const lista = document.getElementById("sinais-automaticos");
-            lista.innerHTML = ""; // Limpa a lista antes de atualizar
-            data.sinais.forEach(sinal => {
-                const item = document.createElement("li");
-                item.textContent = `PAR: ${sinal.par} | INÍCIO: ${sinal.hora} | EXPIRAÇÃO: ${sinal.timeframe} | ORDEM: ${sinal.ordem}`;
-                lista.appendChild(item);
-            });
-        })
-        .catch(err => console.error("Erro ao buscar sinais automáticos:", err));
-};
+async function fetchSinaisAutomaticos() {
+  try {
+      const response = await fetch("/api/sinais-automaticos");
+      if (!response.ok) throw new Error("Erro ao buscar sinais automáticos");
 
-// Gerar sinal manual
-const gerarSinalManual = () => {
-    fetch(`${urlBase}/sinal-manual`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === "error") {
-                alert(data.message);
-                return;
-            }
-            const sinal = data.sinal;
-            const texto = `PAR: ${sinal.par} | INÍCIO: ${sinal.hora} | EXPIRAÇÃO: ${sinal.timeframe} | ORDEM: ${sinal.ordem}`;
-            document.getElementById("manual-sinal").textContent = texto;
-        })
-        .catch(err => console.error("Erro ao gerar sinal manual:", err));
-};
+      const sinais = await response.json();
+      const signalList = document.getElementById("signal-list");
+      signalList.innerHTML = "";
 
-document.getElementById("gerar-sinal-manual").addEventListener("click", gerarSinalManual);
+      sinais.forEach(sinal => {
+          const li = document.createElement("li");
+          li.textContent = `
+              PAR DE MOEDA: ${sinal.paridade}
+              ⚠️ INÍCIO DA OPERAÇÃO: ${sinal.horario}
+              🕖 EXPIRAÇÃO: ${sinal.expiracao}
+              🔔 ORDEM: ${sinal.ordem.toUpperCase()}
+          `;
+          signalList.appendChild(li);
+      });
+  } catch (error) {
+      console.error("Erro ao buscar sinais automáticos:", error);
+  }
+}
 
-// Atualizar sinais automáticos a cada 5 segundos
-setInterval(atualizarSinaisAutomaticos, 5000);
+function gerarSinalManual() {
+  const manualOutput = document.getElementById("manual-signal-output");
+  const sinais = ["Compra", "Venda"];
+  const ordem = sinais[Math.floor(Math.random() * sinais.length)];
+  manualOutput.textContent = `
+      SINAL MANUAL GERADO:
+      🔔 ORDEM: ${ordem.toUpperCase()}
+  `;
+}

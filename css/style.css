@@ -1,52 +1,60 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #121212;
-  color: #fff;
-  text-align: center;
   margin: 0;
   padding: 0;
+  background: #f0f0f0;
+  color: #333;
 }
 
 .container {
   max-width: 800px;
   margin: auto;
   padding: 20px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 header {
+  text-align: center;
   margin-bottom: 20px;
 }
 
-.logo {
+header .logo {
   max-width: 150px;
 }
 
-h1, h2 {
-  color: #FFD700;
+header h1 {
+  font-size: 24px;
+  color: #444;
+}
+
+h2 {
+  color: #555;
 }
 
 button {
-  background-color: #FFD700;
-  border: none;
   padding: 10px 20px;
-  margin: 10px 0;
-  font-size: 16px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 button:hover {
-  background-color: #FFC300;
+  background: #0056b3;
 }
 
-.signal-display {
-  background: #333;
-  padding: 15px;
-  margin: 20px 0;
+#signal-list {
+  list-style: none;
+  padding: 0;
+}
+
+#signal-list li {
+  padding: 10px;
+  margin: 5px 0;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
   border-radius: 5px;
-}
-
-.signal-item {
-  margin-bottom: 15px;
-  border-bottom: 1px solid #444;
-  padding-bottom: 10px;
 }
