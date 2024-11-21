@@ -1,50 +1,38 @@
-// Atualizar sinais automáticos constantemente
-async function atualizarSinaisAutomaticos() {
-  try {
-      const response = await fetch('http://127.0.0.1:5000/sinais-automaticos');
-      const data = await response.json();
+const urlBase = "http://127.0.0.1:5000";
 
-      const display = document.getElementById('auto-signal-display');
-      display.innerHTML = "";
-
-      data.sinais.forEach((sinal) => {
-          const sinalDiv = document.createElement('div');
-          sinalDiv.classList.add('signal-item');
-          sinalDiv.innerHTML = `
-              <p>PAR DE MOEDA: ${sinal.paridade}</p>
-              <p>⚠️INÍCIO DA OPERAÇÃO: ${sinal.horario}</p>
-              <p>🕖EXPIRAÇÃO: ${sinal.timeframe}</p>
-              <p>🔔ORDEM: PARA ${sinal.ordem}</p>
-          `;
-          display.appendChild(sinalDiv);
-      });
-  } catch (error) {
-      console.error('Erro ao carregar sinais automáticos:', error);
-  }
-}
+// Atualizar sinais automáticos
+const atualizarSinaisAutomaticos = () => {
+    fetch(`${urlBase}/sinais`)
+        .then(response => response.json())
+        .then(data => {
+            const lista = document.getElementById("sinais-automaticos");
+            lista.innerHTML = ""; // Limpa a lista antes de atualizar
+            data.sinais.forEach(sinal => {
+                const item = document.createElement("li");
+                item.textContent = `PAR: ${sinal.par} | INÍCIO: ${sinal.hora} | EXPIRAÇÃO: ${sinal.timeframe} | ORDEM: ${sinal.ordem}`;
+                lista.appendChild(item);
+            });
+        })
+        .catch(err => console.error("Erro ao buscar sinais automáticos:", err));
+};
 
 // Gerar sinal manual
-async function gerarSinalManual() {
-  try {
-      const response = await fetch('http://127.0.0.1:5000/sinal-manual');
-      const data = await response.json();
+const gerarSinalManual = () => {
+    fetch(`${urlBase}/sinal-manual`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "error") {
+                alert(data.message);
+                return;
+            }
+            const sinal = data.sinal;
+            const texto = `PAR: ${sinal.par} | INÍCIO: ${sinal.hora} | EXPIRAÇÃO: ${sinal.timeframe} | ORDEM: ${sinal.ordem}`;
+            document.getElementById("manual-sinal").textContent = texto;
+        })
+        .catch(err => console.error("Erro ao gerar sinal manual:", err));
+};
 
-      const display = document.getElementById('manual-signal-display');
-      const sinal = data.sinal;
+document.getElementById("gerar-sinal-manual").addEventListener("click", gerarSinalManual);
 
-      display.innerHTML = `
-          <p>PAR DE MOEDA: ${sinal.paridade}</p>
-          <p>⚠️INÍCIO DA OPERAÇÃO: ${sinal.horario}</p>
-          <p>🕖EXPIRAÇÃO: ${sinal.timeframe}</p>
-          <p>🔔ORDEM: PARA ${sinal.ordem}</p>
-      `;
-  } catch (error) {
-      console.error('Erro ao gerar sinal manual:', error);
-  }
-}
-
-// Configurar eventos
-document.getElementById('gerar-sinal-manual').addEventListener('click', gerarSinalManual);
-
-// Atualizar sinais automáticos periodicamente
+// Atualizar sinais automáticos a cada 5 segundos
 setInterval(atualizarSinaisAutomaticos, 5000);
