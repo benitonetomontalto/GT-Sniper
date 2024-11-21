@@ -6,32 +6,31 @@ import time
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/sinais', methods=['GET'])
-def gerar_sinais():
-    try:
-        # Paridades fictícias
-        paridades = ["EUR/USD", "GBP/USD", "USD/JPY", "AUD/USD", "EUR/JPY"]
-        timeframe = ["1 MIN", "5 MIN", "15 MIN"]
-        sinais = []
+# Função fictícia para gerar sinais
+def gerar_sinal_ficticio():
+    paridades = ["EUR/USD", "GBP/USD", "USD/JPY", "ETH/USD", "BTC/USD"]
+    ordem = random.choice(["CALL", "PUT"])
+    timeframe = random.choice(["M1", "M5", "M15"])
+    horario = time.strftime("%H:%M", time.localtime())
+    
+    return {
+        "paridade": random.choice(paridades),
+        "ordem": ordem,
+        "timeframe": timeframe,
+        "horario": horario
+    }
 
-        # Gerar sinais fictícios
-        for _ in range(5):  # Gerar 5 sinais fictícios
-            ativo = random.choice(paridades)
-            tempo = random.choice(timeframe)
-            sinal = random.choice(["Compra", "Venda"])
-            hora = time.strftime('%H:%M:%S', time.localtime())
+# Rota para sinais automáticos
+@app.route('/sinais-automaticos', methods=['GET'])
+def sinais_automaticos():
+    sinais = [gerar_sinal_ficticio() for _ in range(5)]
+    return jsonify({"status": "success", "sinais": sinais})
 
-            sinais.append({
-                "ativo": ativo,
-                "tempo": tempo,
-                "sinal": sinal,
-                "hora": hora
-            })
-
-        return jsonify({"status": "success", "sinais": sinais})
-    except Exception as e:
-        print(f"Erro interno no servidor: {e}")
-        return jsonify({"status": "error", "message": "Erro interno no servidor"}), 500
+# Rota para sinal manual
+@app.route('/sinal-manual', methods=['GET'])
+def sinal_manual():
+    sinal = gerar_sinal_ficticio()
+    return jsonify({"status": "success", "sinal": sinal})
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True)

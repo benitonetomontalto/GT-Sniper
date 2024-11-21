@@ -1,44 +1,50 @@
-// Gerar sinais automáticos
-const gerarSinaisAutomaticos = () => {
-  const sinaisDiv = document.getElementById('sinais');
-  sinaisDiv.innerHTML = ''; // Limpa sinais anteriores
+// Atualizar sinais automáticos constantemente
+async function atualizarSinaisAutomaticos() {
+  try {
+      const response = await fetch('http://127.0.0.1:5000/sinais-automaticos');
+      const data = await response.json();
 
-  const ativos = ['EUR/USD', 'GBP/USD', 'USD/JPY', 'AUD/USD', 'EUR/JPY'];
-  const tempos = ['1 MIN', '5 MIN', '15 MIN'];
+      const display = document.getElementById('auto-signal-display');
+      display.innerHTML = "";
 
-  ativos.forEach((ativo) => {
-      const tempo = tempos[Math.floor(Math.random() * tempos.length)];
-      const sinal = Math.random() > 0.5 ? 'Compra' : 'Venda';
-      const hora = new Date().toLocaleTimeString();
-
-      // Criar sinal
-      const sinalElement = document.createElement('div');
-      sinalElement.className = 'sinal';
-      sinalElement.innerHTML = `
-          <p><strong>Ativo:</strong> ${ativo}</p>
-          <p><strong>Hora:</strong> ${hora}</p>
-          <p><strong>Tempo:</strong> ${tempo}</p>
-          <p><strong>Sinal:</strong> ${sinal}</p>
-      `;
-      sinaisDiv.appendChild(sinalElement);
-  });
-};
+      data.sinais.forEach((sinal) => {
+          const sinalDiv = document.createElement('div');
+          sinalDiv.classList.add('signal-item');
+          sinalDiv.innerHTML = `
+              <p>PAR DE MOEDA: ${sinal.paridade}</p>
+              <p>⚠️INÍCIO DA OPERAÇÃO: ${sinal.horario}</p>
+              <p>🕖EXPIRAÇÃO: ${sinal.timeframe}</p>
+              <p>🔔ORDEM: PARA ${sinal.ordem}</p>
+          `;
+          display.appendChild(sinalDiv);
+      });
+  } catch (error) {
+      console.error('Erro ao carregar sinais automáticos:', error);
+  }
+}
 
 // Gerar sinal manual
-const gerarSinalManual = () => {
-  const ativo = document.getElementById('ativo').value;
-  const tempo = document.getElementById('tempo').value;
-  const sinal = Math.random() > 0.5 ? 'Compra' : 'Venda';
+async function gerarSinalManual() {
+  try {
+      const response = await fetch('http://127.0.0.1:5000/sinal-manual');
+      const data = await response.json();
 
-  const sinalManualDiv = document.getElementById('sinal-manual');
-  sinalManualDiv.innerHTML = `
-      <p><strong>${ativo}</strong></p>
-      <p>Hora: ${new Date().toLocaleTimeString()}</p>
-      <p><strong>${tempo}</strong></p>
-      <button style="background-color: ${sinal === 'Compra' ? 'green' : 'red'}; color: white;">${sinal}</button>
-  `;
-};
+      const display = document.getElementById('manual-signal-display');
+      const sinal = data.sinal;
 
-// Atualizar sinais automáticos a cada 30 segundos
-setInterval(gerarSinaisAutomaticos, 30000);
-gerarSinaisAutomaticos();
+      display.innerHTML = `
+          <p>PAR DE MOEDA: ${sinal.paridade}</p>
+          <p>⚠️INÍCIO DA OPERAÇÃO: ${sinal.horario}</p>
+          <p>🕖EXPIRAÇÃO: ${sinal.timeframe}</p>
+          <p>🔔ORDEM: PARA ${sinal.ordem}</p>
+      `;
+  } catch (error) {
+      console.error('Erro ao gerar sinal manual:', error);
+  }
+}
+
+// Configurar eventos
+document.getElementById('gerar-sinal-manual').addEventListener('click', gerarSinalManual);
+
+// Atualizar sinais automáticos periodicamente
+setInterval(atualizarSinaisAutomaticos, 5000);
