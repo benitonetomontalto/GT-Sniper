@@ -1,86 +1,43 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #111;
-  color: #fff;
+  background-color: #1a1a1a;
+  color: #f1f1f1;
+  text-align: center;
   margin: 0;
   padding: 0;
 }
 
 .container {
-  width: 90%;
-  max-width: 800px;
-  margin: auto;
+  max-width: 600px;
+  margin: 0 auto;
   padding: 20px;
 }
 
-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-header .logo {
+header img {
   width: 100px;
-  height: auto;
 }
 
-h1 {
-  font-size: 2em;
-  color: #ffdd00;
+header h1 {
+  color: #ffd700;
 }
 
 section {
-  margin-bottom: 20px;
-}
-
-h2 {
-  font-size: 1.5em;
-  color: #ffdd00;
-}
-
-label {
-  display: block;
-  margin-top: 10px;
-}
-
-select, button {
-  width: 100%;
+  margin: 20px 0;
   padding: 10px;
-  margin-top: 5px;
-  border-radius: 5px;
-  border: none;
+  background: #333;
+  border-radius: 8px;
 }
 
 button {
-  background-color: #ffdd00;
-  color: #111;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #ffc107;
-}
-
-#sinal-manual-resultado, #sinais-automaticos {
-  margin-top: 15px;
-  padding: 10px;
-  background-color: #222;
+  padding: 10px 20px;
+  background-color: #ffd700;
+  border: none;
   border-radius: 5px;
-}
-
-.links {
-  margin-top: 20px;
-}
-
-.links button {
-  width: 100%;
-  margin-bottom: 10px;
-  background-color: #ffdd00;
-  color: #111;
-  font-weight: bold;
+  cursor: pointer;
+  color: #000;
   font-size: 16px;
 }
 
-.links button:hover {
-  background-color: #ffc107;
+button:hover {
+  background-color: #ffb700;
 }

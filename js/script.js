@@ -1,44 +1,32 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // Função para gerar sinal manual
-  document.getElementById('gerar-sinal').addEventListener('click', () => {
-      const ativo = document.getElementById('ativo').value;
-      const tempo = document.getElementById('tempo').value;
-      const resultadoDiv = document.getElementById('sinal-manual-resultado');
-      
-      resultadoDiv.innerHTML = `Ativo Selecionado: ${ativo} | Tempo: ${tempo} MIN`;
-  });
-  
-  // Função para buscar sinais automáticos
-  function fetchSinais() {
-      fetch('http://127.0.0.1:5000/sinais')
-          .then(response => response.json())
-          .then(data => {
-              const sinaisDiv = document.getElementById('sinais-automaticos');
-              if (data.status === 'success') {
-                  sinaisDiv.innerHTML = '';
-                  data.sinais.forEach(sinal => {
-                      const sinalElement = document.createElement('div');
-                      sinalElement.innerHTML = `
-                          <p><strong>Paridade:</strong> ${sinal.ativo}</p>
-                          <p><strong>Sinal:</strong> ${sinal.sinal.toUpperCase()}</p>
-                          <p><strong>Prazo:</strong> ${sinal.timeframe} MIN</p>
-                      `;
-                      sinaisDiv.appendChild(sinalElement);
-                  });
-              } else {
-                  sinaisDiv.innerHTML = 'Erro ao gerar sinais.';
-              }
-          })
-          .catch(err => {
-              console.error('Erro ao buscar sinais automáticos:', err);
-              const sinaisDiv = document.getElementById('sinais-automaticos');
-              sinaisDiv.innerHTML = 'Erro ao carregar sinais automáticos.';
-          });
+// Atualizado para buscar os sinais do servidor corretamente
+const API_URL = "https://benitonetomontalto.github.io/GT-Sniper/";
+
+async function fetchSinais() {
+  try {
+    const response = await fetch(API_URL);
+    const data = await response.json();
+    if (data.status === "success") {
+      const sinaisContainer = document.getElementById("sinais-automaticos");
+      sinaisContainer.innerHTML = ""; // Limpa sinais antigos
+      data.sinais.forEach((sinal) => {
+        const sinalElement = `
+          <div class="sinal">
+            <p>Paridade: <strong>${sinal.ativo}</strong></p>
+            <p>Sinal: <strong>${sinal.sinal.toUpperCase()}</strong></p>
+            <p>Prazo: <strong>${sinal.timeframe} min</strong></p>
+          </div>
+        `;
+        sinaisContainer.innerHTML += sinalElement;
+      });
+    } else {
+      console.error("Erro ao gerar sinais:", data.message);
+    }
+  } catch (error) {
+    console.error("Erro ao buscar sinais automáticos:", error);
+    // Adiciona eventos aos botões
+document.getElementById("gerar-sinal-manual").addEventListener("click", fetchSinais);
+
   }
+}
 
-  // Chama a função para buscar sinais ao carregar a página
-  fetchSinais();
-
-  // Atualiza os sinais automaticamente a cada 30 segundos
-  setInterval(fetchSinais, 30000);
-});
+//
