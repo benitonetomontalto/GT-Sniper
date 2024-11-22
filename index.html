@@ -3,41 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
     <title>GT Sniper</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="img/gtsniper.jpeg">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>GT Sniper</h1>
-        </header>
-        <main>
-            <div class="manual-signals">
-                <h2>Sinais Manuais</h2>
-                <button id="generate-signal" onclick="gerarSinalManual()">Gerar Sinal Manual</button>
-                <div id="manual-signal-output"></div>
-            </div>
-
-            <div class="automatic-signals">
-                <h2>Sinais Automáticos</h2>
-                <ul id="automatic-signals-list">
-                    <!-- Lista de sinais automáticos será gerada aqui -->
-                </ul>
-            </div>
-
-            <div class="links-section">
-                <h2>Links Úteis</h2>
-                <ul>
-                    <li><a href="https://t.me/+4F-jO5pTnSoxNWYx" target="_blank">Canal Telegram 1</a></li>
-                    <li><a href="https://t.me/+1mCTz2Kk_IQ4ZDlh" target="_blank">Canal Telegram 2</a></li>
-                    <li><a href="https://tradergtsniper.com.br/comunidade" target="_blank">Comunidade Trader GT Sniper</a></li>
-                    <li><a href="https://atlasbroker.io/?ref=673" target="_blank">Atlas Broker</a></li>
-                </ul>
-            </div>
-        </main>
-        <footer>
-            <p>&copy; 2024 GT Sniper. Todos os direitos reservados.</p>
-        </footer>
+        <div class="logo">
+            <img src="img/gtsniper.jpeg" alt="GT Sniper Logo">
+        </div>
+        <h1>GT Sniper</h1>
+        <h2>Sinais Manuais</h2>
+        <div class="manual-signals">
+            <select id="ativo-select">
+                <option value="EUR/USD">EUR/USD</option>
+                <option value="USD/JPY">USD/JPY</option>
+                <option value="GBP/USD">GBP/USD</option>
+                <option value="AUD/CAD">AUD/CAD</option>
+            </select>
+            <select id="tempo-select">
+                <option value="1 MIN">1 MIN</option>
+                <option value="5 MIN">5 MIN</option>
+            </select>
+            <div id="manual-signal-display">ATIVO<br><span>Sinal será exibido aqui!</span></div>
+            <button id="gerar-sinal-manual" onclick="gerarSinalManual()">GERAR SINAL</button>
+        </div>
+        <h2>Sinais Automáticos</h2>
+        <div id="sinais-automaticos"></div>
+        <div class="links">
+            <a href="https://t.me/+4F-jO5pTnSoxNWYx" target="_blank">Comunidade GT Sniper (Telegram)</a>
+            <a href="https://t.me/+1mCTz2Kk_IQ4ZDlh" target="_blank">Canal Oficial GT Sniper (Telegram)</a>
+            <a href="https://tradergtsniper.com.br/comunidade" target="_blank">Site Comunidade GT Sniper</a>
+            <a href="https://atlasbroker.io/?ref=673" target="_blank">Corretora Atlas Broker</a>
+        </div>
     </div>
     <script src="js/script.js"></script>
 </body>
