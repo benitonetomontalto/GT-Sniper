@@ -1,55 +1,22 @@
-function gerarSinalManual() {
-  if (intervalManual) {
-      alert("Aguarde antes de gerar outro sinal.");
-      return;
-  }
-  intervalManual = true;
+let paridades = ["ETHUSD", "BTCUSD", "EURUSD", "GBPUSD"];
+let sinais = ["PUT", "CALL"];
+let tempos = ["1 MIN", "5 MIN", "15 MIN"];
 
-  const ativo = document.getElementById("ativo-select").value;
-  const tempo = document.getElementById("tempo-select").value;
+// Atualizar sinal automaticamente
+function gerarSinalAutomatico() {
+    const asset = paridades[Math.floor(Math.random() * paridades.length)];
+    const signal = sinais[Math.floor(Math.random() * sinais.length)];
+    const time = tempos[Math.floor(Math.random() * tempos.length)];
 
-  const ordem = Math.random() > 0.5 ? "PUT" : "CALL";
+    document.getElementById("asset").textContent = asset;
+    document.getElementById("signal").textContent = signal;
+    document.getElementById("time").textContent = time;
 
-  fetch("https://worldtimeapi.org/api/timezone/America/Sao_Paulo")
-      .then(response => response.json())
-      .then(data => {
-          const hora = data.datetime.split("T")[1].split(".")[0];
-          const sinal = `
-              PARIDADE: ${ativo}
-              ⚠️ INÍCIO DA OPERAÇÃO: ${hora}
-              🕖 EXPIRAÇÃO: ${tempo}
-              🔔 ORDEM: PARA ${ordem}
-          `;
-
-          document.getElementById("manual-signal-display").innerHTML = sinal;
-      });
-
-  setTimeout(() => {
-      intervalManual = false;
-  }, 60000);
+    alert(`PAR DE MOEDA: ${asset}\n⚠️INÍCIO DA OPERAÇÃO: ${new Date().toLocaleTimeString("pt-BR")}\n🕖EXPIRAÇÃO ${time}\n🔔ORDEM: PARA ${signal}`);
 }
 
-function fetchSinaisAutomaticos() {
-  setInterval(() => {
-      fetch("/sinais-automaticos")
-          .then(response => response.json())
-          .then(data => {
-              const sinaisDiv = document.getElementById("sinais-automaticos");
-              sinaisDiv.innerHTML = ""; // Limpa sinais antigos
+// Configurar botão
+document.getElementById("next-signal").addEventListener("click", gerarSinalAutomatico);
 
-              data.forEach(sinal => {
-                  const sinalDiv = document.createElement("div");
-                  sinalDiv.className = "sinal-automatico";
-                  sinalDiv.textContent = `
-                      PARIDADE: ${sinal.ativo}
-                      ⚠️ INÍCIO DA OPERAÇÃO: ${sinal.horario}
-                      🕖 EXPIRAÇÃO: ${sinal.tempo}
-                      🔔 ORDEM: PARA ${sinal.ordem}
-                  `;
-                  sinaisDiv.appendChild(sinalDiv);
-              });
-          });
-  }, 30000); // Atualiza sinais automáticos a cada 30 segundos
-}
-
-fetchSinaisAutomaticos();
+// Iniciar automaticamente
+setInterval(gerarSinalAutomatico, 60000); // Atualiza a cada 1 minuto
