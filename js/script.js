@@ -1,22 +1,39 @@
-let paridades = ["ETHUSD", "BTCUSD", "EURUSD", "GBPUSD"];
-let sinais = ["PUT", "CALL"];
-let tempos = ["1 MIN", "5 MIN", "15 MIN"];
+let signalInterval;
 
-// Atualizar sinal automaticamente
-function gerarSinalAutomatico() {
-    const asset = paridades[Math.floor(Math.random() * paridades.length)];
-    const signal = sinais[Math.floor(Math.random() * sinais.length)];
-    const time = tempos[Math.floor(Math.random() * tempos.length)];
-
-    document.getElementById("asset").textContent = asset;
-    document.getElementById("signal").textContent = signal;
-    document.getElementById("time").textContent = time;
-
-    alert(`PAR DE MOEDA: ${asset}\n⚠️INÍCIO DA OPERAÇÃO: ${new Date().toLocaleTimeString("pt-BR")}\n🕖EXPIRAÇÃO ${time}\n🔔ORDEM: PARA ${signal}`);
+function getHoraAtualBrasilia() {
+    const now = new Date();
+    const utcNow = now.getTime() + now.getTimezoneOffset() * 60000; // Ajuste UTC
+    const brasiliaTime = new Date(utcNow + 3600000 * -3); // UTC-3 para Brasília
+    const horas = brasiliaTime.getHours().toString().padStart(2, "0");
+    const minutos = brasiliaTime.getMinutes().toString().padStart(2, "0");
+    return `${horas}:${minutos}`;
 }
 
-// Configurar botão
-document.getElementById("next-signal").addEventListener("click", gerarSinalAutomatico);
+function gerarSinal() {
+    if (signalInterval) {
+        alert("Aguarde enquanto analisamos o próximo sinal!");
+        return;
+    }
 
-// Iniciar automaticamente
-setInterval(gerarSinalAutomatico, 60000); // Atualiza a cada 1 minuto
+    document.getElementById("asset").innerText = "ANALYSING...";
+    document.getElementById("order").innerText = "WAITING...";
+    document.getElementById("time").innerText = "WAITING...";
+
+    signalInterval = setTimeout(() => {
+        const assets = ["EUR/USD", "GBP/USD", "AUD/CAD", "ETH/USD"];
+        const times = ["1 MIN", "5 MIN", "15 MIN"];
+        const orders = ["BUY", "SELL"];
+
+        const selectedAsset = assets[Math.floor(Math.random() * assets.length)];
+        const selectedTime = times[Math.floor(Math.random() * times.length)];
+        const selectedOrder = orders[Math.floor(Math.random() * orders.length)];
+        const horaAtual = getHoraAtualBrasilia();
+
+        document.getElementById("asset").innerText = selectedAsset;
+        document.getElementById("order").innerText = selectedOrder === "BUY" ? "CALL" : "PUT";
+        document.getElementById("time").innerText = `${horaAtual} (${selectedTime})`;
+
+        clearTimeout(signalInterval);
+        signalInterval = null;
+    }, 30000); // Wait for 30 seconds
+}

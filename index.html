@@ -3,26 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
     <title>GT Sniper</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
-        <img src="imgicon-192" alt="GT Sniper Logo" class="logo">
-        <div class="signal-box">
-            <h3>ASSET</h3>
-            <div id="asset" class="signal">ETHUSD</div>
-            <h3>BUTTON</h3>
-            <div id="signal" class="signal signal-action">PUT</div>
-            <h3>TIME</h3>
-            <div id="time" class="signal">1 MIN</div>
+        <div class="logo">
+            <img src="img/gtsniper.jpeg" alt="GT Sniper Logo">
         </div>
-        <button id="next-signal" class="next-button">NEXT SIGNAL</button>
+        <div id="signal-container">
+            <h3>ASSET</h3>
+            <div id="asset" class="box">EUR/USD</div>
+            <h3>BUTTON</h3>
+            <div id="order" class="box">WAITING...</div>
+            <h3>TIME</h3>
+            <div id="time" class="box">WAITING...</div>
+        </div>
+        <button id="generate-signal" onclick="gerarSinal()">NEXT SIGNAL</button>
         <div class="links">
-            <button onclick="window.open('https://t.me/+4F-jO5pTnSoxNWYx')">Comunidade GT Sniper</button>
-            <button onclick="window.open('https://t.me/+1mCTz2Kk_IQ4ZDlh')">Canal Oficial GT Sniper</button>
-            <button onclick="window.open('https://tradergtsniper.com.br/comunidade')">Site Comunidade GT Sniper</button>
-            <button onclick="window.open('https://atlasbroker.io/?ref=673')">Corretora Atlas Broker</button>
+            <button onclick="window.open('https://t.me/+4F-jO5pTnSoxNWYx', '_blank')">Comunidade GT Sniper</button>
+            <button onclick="window.open('https://t.me/+1mCTz2Kk_IQ4ZDlh', '_blank')">Canal Oficial GT Sniper</button>
+            <button onclick="window.open('https://tradergtsniper.com.br/comunidade', '_blank')">Site Comunidade GT Sniper</button>
+            <button onclick="window.open('https://atlasbroker.io/?ref=673', '_blank')">Corretora Atlas Broker</button>
         </div>
     </div>
     <script src="js/script.js"></script>
